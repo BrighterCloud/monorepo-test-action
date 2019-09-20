@@ -1,11 +1,11 @@
 console.log('started nodejs...')
 
-const fs = require('fs')
+const path = require('path')
 const helpers = require('./helpers')
 const child_process = require('child_process');
 const _ = require('underscore')
 
-console.log(JSON.stringify(process.env));
+const githubWorkspace = path.join(process.env.RUNNER_WORKSPACE, eventRepo); 
 
 //require octokit rest.js
 //more info at https://github.com/octokit/rest.js
@@ -49,14 +49,14 @@ async function findChangedReposAndRunTests() {
   //reduce to unique repos
   const prFilesReposUnique = _.uniq(prFilesRepos)
 
-  console.log(fs.readdirSync("./"));
-
   //add label for each monorepo repo
   for (const repo of prFilesReposUnique) {
     if (repo) {
       console.log(`running tests in repo: ${repo}`)
 
-      child_process.execSync("cd " + eventRepo + "/" + repo + " && npm install && npm run build && npm run test");
+      const currentPath = path.join(githubWorkspace, repo);
+
+      child_process.execSync("cd " + currentPath + " && npm install && npm run build && npm run test");
     }
   }
 }
