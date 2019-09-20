@@ -59,11 +59,12 @@ async function findChangedReposAndRunTests() {
       const currentPath = path.join(githubWorkspace, repo);
 
       try {
-        console.log(child_process.execSync("cd " + currentPath + " && npm install && npm run build && npm run test"));
+        console.log(child_process.execSync("cd " + currentPath + " && npm install && npm run test"));
       } catch (e) {
         console.log("Failed to execute");
         core.setFailed(e.message);
         console.error(e);
+        return;
       }
     }
   }
