@@ -12,4 +12,3 @@ npm install
 echo $(date)
 
 node app.js
-echo $(date)

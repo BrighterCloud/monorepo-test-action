@@ -66,7 +66,6 @@ async function findChangedReposAndRunTests() {
       } catch (e) {
         console.log("Failed to execute");
         core.setFailed(e.message);
-        return 1;
       }
     }
   }
@@ -74,5 +73,3 @@ async function findChangedReposAndRunTests() {
 
 //run the function
 findChangedReposAndRunTests()
-
-module.exports.findChangedReposAndRunTests = findChangedReposAndRunTests
