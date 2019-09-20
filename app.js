@@ -2,6 +2,7 @@ console.log('started nodejs...')
 
 const fs = require('fs')
 const core = require('@actions/core');
+const exec = require('@actions/exec')
 const path = require('path')
 const helpers = require('./helpers')
 const child_process = require('child_process');
@@ -56,10 +57,12 @@ async function findChangedReposAndRunTests() {
     if (repo) {
       console.log(`running tests in repo: ${repo}`)
 
-      const currentPath = path.join(githubWorkspace, repo);
-
       try {
-        console.log(child_process.execSync("cd " + currentPath + " && npm install && npm run test"));
+        const options = {
+          cwd: path.join(githubWorkspace, repo)
+        }
+        await exec.exec("npm", ["install"], options)
+        await exec.exec("npm", ["run test"], options)
       } catch (e) {
         console.log("Failed to execute");
         core.setFailed(e.message);
