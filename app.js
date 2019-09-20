@@ -62,7 +62,7 @@ async function findChangedReposAndRunTests() {
           cwd: path.join(githubWorkspace, repo)
         }
         await exec.exec("npm", ["install"], options)
-        await exec.exec("npm", ["run test"], options)
+        await exec.exec("npm", ["test"], options)
       } catch (e) {
         console.log("Failed to execute");
         core.setFailed(e.message);
