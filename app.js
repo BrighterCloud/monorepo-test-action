@@ -1,11 +1,10 @@
 console.log('started nodejs...')
 
+const core = require('@actions/core');
 const path = require('path')
 const helpers = require('./helpers')
 const child_process = require('child_process');
 const _ = require('underscore')
-
-const githubWorkspace = path.join(process.env.RUNNER_WORKSPACE, eventRepo); 
 
 //require octokit rest.js
 //more info at https://github.com/octokit/rest.js
@@ -21,6 +20,8 @@ if (process.env.BASE_DIRS) baseDirectories = `(?:${process.env.BASE_DIRS})\/`
 const eventOwnerAndRepo = process.env.GITHUB_REPOSITORY
 const eventOwner = helpers.getOwner(eventOwnerAndRepo)
 const eventRepo = helpers.getRepo(eventOwnerAndRepo)
+
+const githubWorkspace = path.join(process.env.RUNNER_WORKSPACE, eventRepo); 
 
 async function findChangedReposAndRunTests() {
   //read contents of action's event.json
@@ -60,6 +61,7 @@ async function findChangedReposAndRunTests() {
         console.log(child_process.execSync("cd " + currentPath + " && npm install && npm run build && npm run test"));
       } catch (e) {
         console.error(e);
+        core.setFailed(e.message);
       }
     }
   }

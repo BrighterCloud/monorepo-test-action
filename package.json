@@ -26,6 +26,7 @@
   },
   "homepage": "https://www.tinkurlab.com",
   "dependencies": {
+    "@actions/core": "^1.1.1",
     "@octokit/rest": "^16.28.7",
     "underscore": "^1.9.1"
   },
