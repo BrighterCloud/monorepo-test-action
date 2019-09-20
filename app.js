@@ -22,9 +22,7 @@ const eventOwnerAndRepo = process.env.GITHUB_REPOSITORY
 const eventOwner = helpers.getOwner(eventOwnerAndRepo)
 const eventRepo = helpers.getRepo(eventOwnerAndRepo)
 
-const githubWorkspace = process.env.GITHUB_WORKSPACE //path.join(process.env.RUNNER_WORKSPACE, eventRepo); 
-
-console.log(JSON.stringify(fs.readdirSync(githubWorkspace)))
+const githubWorkspace = process.env.GITHUB_WORKSPACE
 
 async function findChangedReposAndRunTests() {
   //read contents of action's event.json

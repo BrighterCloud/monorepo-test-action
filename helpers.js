@@ -45,6 +45,8 @@ module.exports.listFiles = async function(
 }
 
 module.exports.getMonorepo = function(baseDirectories, filePath) {
+  console.log("baseDirectories: " + baseDirectories);
+  console.log("file path: " + filePath);
   const regexPattern = `^${baseDirectories}([^./]*)/`
   var regex = new RegExp(regexPattern)
   var found = filePath.match(regex)
