@@ -66,8 +66,7 @@ async function findChangedReposAndRunTests() {
       } catch (e) {
         console.log("Failed to execute");
         core.setFailed(e.message);
-        console.error(e);
-        return;
+        throw e;
       }
     }
   }
