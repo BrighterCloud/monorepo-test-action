@@ -1,5 +1,6 @@
 console.log('started nodejs...')
 
+const fs = require('fs')
 const helpers = require('./helpers')
 const child_process = require('child_process');
 const _ = require('underscore')
@@ -46,12 +47,14 @@ async function findChangedReposAndRunTests() {
   //reduce to unique repos
   const prFilesReposUnique = _.uniq(prFilesRepos)
 
+  console.log(fs.readdirSync("./"));
+
   //add label for each monorepo repo
   for (const repo of prFilesReposUnique) {
     if (repo) {
       console.log(`running tests in repo: ${repo}`)
 
-      child_process.execSync("cd " + repo + " && npm install && npm run build && npm run test");
+      child_process.execSync("cd " + eventRepo + "/" + repo + " && npm install && npm run build && npm run test");
     }
   }
 }
