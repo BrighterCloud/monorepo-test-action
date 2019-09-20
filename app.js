@@ -5,6 +5,8 @@ const helpers = require('./helpers')
 const child_process = require('child_process');
 const _ = require('underscore')
 
+console.log(JSON.stringify(process.env));
+
 //require octokit rest.js
 //more info at https://github.com/octokit/rest.js
 const Octokit = require('@octokit/rest')
