@@ -1,5 +1,6 @@
 console.log('started nodejs...')
 
+const fs = require('fs')
 const core = require('@actions/core');
 const path = require('path')
 const helpers = require('./helpers')
@@ -22,6 +23,8 @@ const eventOwner = helpers.getOwner(eventOwnerAndRepo)
 const eventRepo = helpers.getRepo(eventOwnerAndRepo)
 
 const githubWorkspace = path.join(process.env.RUNNER_WORKSPACE, eventRepo); 
+
+console.log(JSON.stringify(fs.readdirSync(githubWorkspace)))
 
 async function findChangedReposAndRunTests() {
   //read contents of action's event.json
@@ -60,8 +63,9 @@ async function findChangedReposAndRunTests() {
       try {
         console.log(child_process.execSync("cd " + currentPath + " && npm install && npm run build && npm run test"));
       } catch (e) {
-        console.error(e);
+        console.log("Failed to execute");
         core.setFailed(e.message);
+        console.error(e);
       }
     }
   }
