@@ -61,8 +61,12 @@ async function findChangedReposAndRunTests() {
         const options = {
           cwd: path.join(githubWorkspace, repo)
         }
-        await exec.exec("npm", ["install"], options)
-        await exec.exec("npm", ["test"], options)
+        if (fs.existsSync(path.join(options.cwd, "package.json"))) {
+          await exec.exec("npm", ["install"], options)
+          await exec.exec("npm", ["test"], options)
+        } else {
+          console.log("no node application - skipping tests");
+        }
       } catch (e) {
         console.log("Failed to execute");
         core.setFailed(e.message);
