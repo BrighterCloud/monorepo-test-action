@@ -62,6 +62,9 @@ async function findChangedReposAndRunTests() {
           cwd: path.join(githubWorkspace, repo)
         }
         if (fs.existsSync(path.join(options.cwd, "package.json"))) {
+          if (fs.existsSync(path.join(options.cwd, "pre-test.sh"))) {
+            await exec.exec("sh", ["pre-test.sh"], options);
+          }
           await exec.exec("npm", ["install"], options)
           await exec.exec("npm", ["test"], options)
         } else {
