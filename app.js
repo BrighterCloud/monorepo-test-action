@@ -55,7 +55,7 @@ async function findChangedReposAndRunTests() {
   //add label for each monorepo repo
   for (const repo of prFilesReposUnique) {
     if (repo) {
-      console.log(`running tests in repo: ${repo}`)
+      core.startGroup('Run tests in ' + repo);
 
       try {
         const options = {
@@ -74,6 +74,8 @@ async function findChangedReposAndRunTests() {
         console.log("Failed to execute");
         core.setFailed(e.message);
       }
+
+      core.endGroup()
     }
   }
 }
