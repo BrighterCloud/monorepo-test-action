@@ -12,4 +12,6 @@ ADD helpers.js /action/helpers.js
 
 RUN chmod +x /action/entrypoint.sh
 
+RUN apt-get install libcurl3
+
 ENTRYPOINT ["/action/entrypoint.sh"]
