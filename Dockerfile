@@ -1,4 +1,4 @@
-FROM node:8-slim
+FROM node:10-slim
 
 LABEL "com.github.actions.name"="Monorepo PR Test executor"
 LABEL "com.github.actions.description"="Runs tests in changed sub repositories of a monorepo"
