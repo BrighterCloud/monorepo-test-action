@@ -12,6 +12,6 @@ ADD helpers.js /action/helpers.js
 
 RUN chmod +x /action/entrypoint.sh
 
-RUN apt-get install libcurl3 libssl1.0.0
+RUN apt-get install libcurl3 libssl
 
 ENTRYPOINT ["/action/entrypoint.sh"]
