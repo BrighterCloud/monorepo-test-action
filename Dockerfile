@@ -12,8 +12,10 @@ ADD helpers.js /action/helpers.js
 
 RUN chmod +x /action/entrypoint.sh
 
-RUN deb http://deb.debian.org/debian jessie main
 RUN apt-get update
-RUN apt-get install libcurl3 libssl1.0.0
+RUN apt-get install -y software-properties-common
+RUN apt-add-repository 'deb http://deb.debian.org/debian jessie main'
+RUN apt-get update
+RUN apt-get install -y libcurl3 libssl1.0.0
 
 ENTRYPOINT ["/action/entrypoint.sh"]
