@@ -29,7 +29,7 @@
     "@actions/core": "^1.1.1",
     "@actions/exec": "^1.0.1",
     "@octokit/rest": "^16.28.7",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "jest": "^23.6.0"
